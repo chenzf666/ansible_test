@@ -8,6 +8,21 @@ steps:
     image: alpine
     commands:
       - echo "=== 自动触发步骤 ==="
-      - echo "项目名称: ${DRONE_REPO}"
-      - echo "当前分支: ${DRONE_COMMIT_BRANCH}"
 
+  # 第2个step - 手动触发
+  - name: manual-step-1
+    image: alpine
+    commands:
+      - echo "=== 第一个手动步骤 ==="
+    when:
+      event: [ manual ]
+    depends_on: [ auto-step ]
+
+  # 第3个step - 手动触发
+  - name: manual-step-2
+    image: alpine
+    commands:
+      - echo "=== 第二个手动步骤 ==="
+    when:
+      event: [ manual ]
+    depends_on: [ manual-step-1 ]
