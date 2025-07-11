@@ -12,8 +12,9 @@ steps:
     image: alpine
     commands:
       - echo "=== 第一个手动步骤 ==="
-    when:
-      event: [ promote ]
+    settings:
+      approve: true
+      message: "请确认是否继续部署？"
     depends_on: [ auto-step ]
 
   - name: promote-step-2
