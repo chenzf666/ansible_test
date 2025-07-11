@@ -20,7 +20,6 @@ steps:
     settings:
       approve: true
       message: "请确认是否继续部署？"
-    depends_on: [ auto-step ]
 
 
 ---
@@ -32,7 +31,6 @@ steps:
     image: alpine
     commands:
       - echo "=== 第二个手动步骤 ==="
-    depends_on: [ promote-step-1 ]
 
 ---
 kind: pipeline
@@ -45,4 +43,3 @@ steps:
       - echo "=== 第三个手动步骤 ==="
     when:
       event: [ promote ]
-    depends_on: [ promote-step-2 ]
