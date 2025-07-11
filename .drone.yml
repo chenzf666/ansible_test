@@ -11,7 +11,7 @@ steps:
 ---
 kind: pipeline
 type: docker
-name: auto-and-promote-steps
+name: auto-and-promote-steps-1
 steps:
   - name: promote-step-1
     image: alpine
@@ -26,7 +26,7 @@ steps:
 ---
 kind: pipeline
 type: docker
-name: auto-and-promote-steps
+name: auto-and-promote-steps-2
 steps:
   - name: promote-step-2
     image: alpine
@@ -37,7 +37,7 @@ steps:
 ---
 kind: pipeline
 type: docker
-name: auto-and-promote-steps
+name: auto-and-promote-steps-3
 steps:
   - name: promote-step-3
     image: alpine
