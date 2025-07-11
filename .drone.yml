@@ -1,4 +1,18 @@
 
+DB_ENGINE=mysql
+DB_HOST=rm-rj914gct59kaoybi7.mysql.rds.aliyuncs.com
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=evo001@inke
+DB_NAME=jumpserver
+
+DB_ENGINE=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=
+DB_NAME=jumpserver
+
 kind: pipeline
 type: docker
 name: auto-and-manual-steps
@@ -13,18 +27,20 @@ steps:
     image: alpine
     commands:
       - echo "=== 第一个手动步骤 ==="
-    detach: true
+    when:
+        event: [ promote ]
     depends_on: [ auto-step ]
 
   - name: manual-step-2
     image: alpine
     commands:
       - echo "=== 第二个手动步骤 ==="
-    detach: true
     depends_on: [ manual-step-1 ]
-    
+
   - name: manual-step-3
     image: alpine
     commands:
       - echo "=== 第三个手动步骤 ==="
+    when:
+      event: [ promote ]
     depends_on: [ manual-step-2 ]
