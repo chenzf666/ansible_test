@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: auto-and-manual-steps
+name: auto-and-promote-steps
 
 steps:
   - name: auto-step
@@ -8,24 +8,24 @@ steps:
     commands:
       - echo "=== 自动触发步骤 ==="
 
-  - name: manual-step-1
+  - name: promote-step-1
     image: alpine
     commands:
       - echo "=== 第一个手动步骤 ==="
     when:
-      event: [ manual ]
+      event: [ promote ]
     depends_on: [ auto-step ]
 
-  - name: manual-step-2
+  - name: promote-step-2
     image: alpine
     commands:
       - echo "=== 第二个手动步骤 ==="
-    depends_on: [ manual-step-1 ]
+    depends_on: [ promote-step-1 ]
 
-  - name: manual-step-3
+  - name: promote-step-3
     image: alpine
     commands:
       - echo "=== 第三个手动步骤 ==="
     when:
-      event: [ manual ]
-    depends_on: [ manual-step-2 ]
+      event: [ promote ]
+    depends_on: [ promote-step-2 ]
