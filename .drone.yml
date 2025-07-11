@@ -8,19 +8,19 @@ steps:
     image: alpine
     commands:
       - echo "This step runs automatically on commit"
-      - echo "项目名称: ${DRONE_REPO_NAME}"
-      - echo "当前分支: ${DRONE_COMMIT_BRANCH}"
-      - echo "提交SHA: ${DRONE_COMMIT_SHA}"
-      - echo "提交信息: ${DRONE_COMMIT_MESSAGE}"
+      - echo "项目名称: 123123"
+      - echo "当前分支: 123123"
+      - echo "提交SHA: 123123"
+      - echo "提交信息: 123123"
 
   # 第二个step - 手动触发
   - name: manual-step-1
     image: alpine
     commands:
       - echo "===== 这是第一个手动步骤 ====="
-      - echo "项目: ${DRONE_REPO}"
-      - echo "构建编号: ${DRONE_BUILD_NUMBER}"
-      - echo "触发事件: ${DRONE_BUILD_EVENT}"
+      - echo "项目: 123123"
+      - echo "构建编号: 123123"
+      - echo "触发事件: 123123"
     when:
       event: manual
     depends_on: [ auto-step ]
@@ -30,9 +30,9 @@ steps:
     image: alpine
     commands:
       - echo "===== 这是第二个手动步骤 ====="
-      - echo "构建状态: ${DRONE_BUILD_STATUS}"
-      - echo "提交作者: ${DRONE_COMMIT_AUTHOR}"
-      - echo "提交时间: ${DRONE_COMMIT_AUTHOR_EMAIL}"
+      - echo "构建状态: 123123"
+      - echo "提交作者: 123123"
+      - echo "提交时间: 123123"
     when:
       event: manual
     depends_on: [ manual-step-1 ]
