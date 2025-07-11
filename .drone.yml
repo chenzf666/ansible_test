@@ -8,6 +8,11 @@ steps:
     commands:
       - echo "=== 自动触发步骤 ==="
 
+---
+kind: pipeline
+type: docker
+name: auto-and-promote-steps
+steps:
   - name: promote-step-1
     image: alpine
     commands:
@@ -17,12 +22,23 @@ steps:
       message: "请确认是否继续部署？"
     depends_on: [ auto-step ]
 
+
+---
+kind: pipeline
+type: docker
+name: auto-and-promote-steps
+steps:
   - name: promote-step-2
     image: alpine
     commands:
       - echo "=== 第二个手动步骤 ==="
     depends_on: [ promote-step-1 ]
 
+---
+kind: pipeline
+type: docker
+name: auto-and-promote-steps
+steps:
   - name: promote-step-3
     image: alpine
     commands:
