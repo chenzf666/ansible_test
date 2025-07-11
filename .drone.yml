@@ -1,38 +1,32 @@
 kind: pipeline
 type: docker
-name: manual-trigger-demo
+name: auto-and-manual-steps
 
 steps:
-  # 第一个step - 自动触发
+  # 第1个step - 自动触发
   - name: auto-step
     image: alpine
     commands:
-      - echo "This step runs automatically on commit"
-      - echo "项目名称: 123123"
-      - echo "当前分支: 123123"
-      - echo "提交SHA: 123123"
-      - echo "提交信息: 123123"
+      - echo "=== 自动触发步骤 ==="
+      - echo "项目名称: ${DRONE_REPO}"
+      - echo "当前分支: ${DRONE_COMMIT_BRANCH}"
 
-  # 第二个step - 手动触发
+  # 第2个step - 手动触发
   - name: manual-step-1
     image: alpine
     commands:
-      - echo "===== 这是第一个手动步骤 ====="
-      - echo "项目: 123123"
-      - echo "构建编号: 123123"
-      - echo "触发事件: 123123"
+      - echo "=== 第一个手动步骤 ==="
+      - echo "这是需要手动触发的第一步"
     when:
-      event: manual
+      event: [ manual ]
     depends_on: [ auto-step ]
 
-  # 第三个step - 手动触发
+  # 第3个step - 手动触发
   - name: manual-step-2
     image: alpine
     commands:
-      - echo "===== 这是第二个手动步骤 ====="
-      - echo "构建状态: 123123"
-      - echo "提交作者: 123123"
-      - echo "提交时间: 123123"
+      - echo "=== 第二个手动步骤 ==="
+      - echo "这是需要手动触发的第二步"
     when:
-      event: manual
+      event: [ manual ]
     depends_on: [ manual-step-1 ]
