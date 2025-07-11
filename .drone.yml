@@ -13,7 +13,7 @@ steps:
     commands:
       - echo "=== 第一个手动步骤 ==="
     when:
-      event: [ promote ]
+      event: [ manual ]
     depends_on: [ auto-step ]
 
   - name: manual-step-2
@@ -27,5 +27,5 @@ steps:
     commands:
       - echo "=== 第三个手动步骤 ==="
     when:
-      event: [ promote ]
+      event: [ manual ]
     depends_on: [ manual-step-2 ]
