@@ -1,11 +1,14 @@
 ---
 - hosts: all
   tasks:
-    - name: 显示精简OS信息
+    - name: 获取精简OS信息
+      ansible.builtin.command: |
+        echo "主机名: $(hostname)"
+        echo "内核: $(uname -sr)"
+        { [ -f /etc/os-release ] && . /etc/os-release && echo "系统: $PRETTY_NAME" || echo "系统: $(cat /etc/*release 2>/dev/null | head -n1)"; }
+      register: os_info
+      changed_when: false
+
+    - name: 显示信息
       ansible.builtin.debug:
-        msg: |
-          系统类型: {{ ansible_os_family }}
-          发行版: {{ ansible_distribution }} {{ ansible_distribution_version }}
-          内核版本: {{ ansible_kernel }}
-          主机名: {{ ansible_hostname }}
-          CPU架构: {{ ansible_architecture }}
+        msg: "{{ os_info.stdout }}"
