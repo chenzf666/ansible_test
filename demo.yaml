@@ -1,0 +1,11 @@
+---
+- hosts: all
+  tasks:
+    - name: 显示精简OS信息
+      ansible.builtin.debug:
+        msg: |
+          系统类型: {{ ansible_os_family }}
+          发行版: {{ ansible_distribution }} {{ ansible_distribution_version }}
+          内核版本: {{ ansible_kernel }}
+          主机名: {{ ansible_hostname }}
+          CPU架构: {{ ansible_architecture }}
