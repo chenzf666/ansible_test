@@ -1,3 +1,4 @@
+
 kind: pipeline
 type: docker
 name: auto-and-manual-steps
@@ -12,14 +13,18 @@ steps:
     image: alpine
     commands:
       - echo "=== 第一个手动步骤 ==="
-    when:
-      event: [ manual ]
+    detach: true
     depends_on: [ auto-step ]
 
   - name: manual-step-2
     image: alpine
     commands:
       - echo "=== 第二个手动步骤 ==="
-    when:
-      event: [ manual ]
+    detach: true
     depends_on: [ manual-step-1 ]
+    
+  - name: manual-step-3
+    image: alpine
+    commands:
+      - echo "=== 第三个手动步骤 ==="
+    depends_on: [ manual-step-2 ]
