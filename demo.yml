@@ -12,3 +12,6 @@
     - name: 显示信息
       ansible.builtin.debug:
         msg: "{{ os_info.stdout }}"
+
+
+        
